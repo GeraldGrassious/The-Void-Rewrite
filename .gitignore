@@ -1,0 +1,5 @@
+bin/
+obj/
+.vs/
+server.py
+message_log.json
