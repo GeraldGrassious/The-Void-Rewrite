@@ -3,11 +3,26 @@
         xmlns:vm="using:TheVoidRewrite.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="using:TheVoidRewrite.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="TheVoidRewrite.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Assets/favicon.ico"
-        Title="TheVoidRewrite">
+        Title="TheVoidRewrite"
+        Background="#040404" 
+        WindowDecorations="BorderOnly"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaTitleBarHeightHint="32"
+        CanResize="True">
+
+    <Window.DataTemplates>
+        <DataTemplate DataType="vm:NameViewModel">
+            <views:NameView/>
+        </DataTemplate>
+        <DataTemplate DataType="vm:MessageViewModel">
+            <views:MessageView/>
+        </DataTemplate>
+    </Window.DataTemplates>
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -15,8 +30,21 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <TextBox Text="{Binding Greeting}"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center" />
+    <StackPanel>
+        <Border Grid.Row="0" Grid.Column="0" Background="#010101" VerticalAlignment="Top" PointerPressed="TitleBar_PointerPressed">
+            <DockPanel>
+                <TextBlock x:Name="ConnectionText" FontFamily="{StaticResource LowerPixel}">Attempting to Connect...</TextBlock>
+
+                <Button DockPanel.Dock="Right" Content="✕" VerticalAlignment="Center"  Background="Transparent" Foreground="#EEEEEE" CornerRadius="0" FontSize="18" Click="CloseButton_Clicked"/>
+                <Button DockPanel.Dock="Right" x:Name="MaximizeButton" Content="☐" VerticalAlignment="Center"  Background="Transparent" Foreground="#EEEEEE" CornerRadius="0" FontSize="18" Click="MaximizeButton_Clicked"/>
+                <Button DockPanel.Dock="Right" Content="—" HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent" Foreground="#EEEEEE" CornerRadius="0" FontSize="18" Click="MinimizeButton_Clicked"/>
+            </DockPanel>
+        </Border>
+
+        <Button Command="{Binding GoNameCommand}"/>
+        <Button Command="{Binding GoMessageCommand}"/>
+
+        <ContentControl Content="{Binding CurrentPage}" />
+    </StackPanel>
 
 </Window>

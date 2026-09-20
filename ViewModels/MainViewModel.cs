@@ -1,12 +1,24 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using TheVoidRewrite.Models;
 
 namespace TheVoidRewrite.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    public partial string Greeting { get; set; } = "Welcome to Avalonia!";
+    private MessageHandler messageHandler = new();
 
-    MessageHandler messageHandler = new();
+    [ObservableProperty]
+    private ObservableObject _currentPage;
+
+    public MainViewModel()
+    {
+        _currentPage = new NameViewModel(messageHandler);
+    }
+
+    [RelayCommand]
+    private void GoName() => CurrentPage = new NameViewModel(messageHandler);
+
+    [RelayCommand]
+    private void GoMessage() => CurrentPage = new MessageViewModel(messageHandler);
 }

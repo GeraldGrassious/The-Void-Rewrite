@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:TheVoidRewrite.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="using:TheVoidRewrite.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TheVoidRewrite.Views.MessageView"
+        x:DataType="vm:MessageViewModel">
+
+    <UserControl.Styles>
+        <Style Selector="TextBox.messageInput">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Background" Value="#111111"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="PlaceholderText" Value="Type Message Here..."/>
+            <Setter Property="FontFamily" Value="{StaticResource LowerPixel}"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="LetterSpacing" Value="1"/>
+            <Setter Property="Foreground" Value="#EEEEEE"></Setter>
+        </Style>
+
+        <Style Selector="TextBox.messageInput:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#111111"/>
+            <Setter Property="BorderBrush" Value="#111111"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style Selector="TextBox.messageInput:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="BorderBrush" Value="#111111"/>
+            <Setter Property="Background" Value="#111111"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Grid>
+        <TextBox Grid.Row="0" x:Name="MessageInput" Classes="messageInput" MaxLength="7500" TextAlignment="DetectFromContent" AcceptsReturn="True" KeyDown="MessageInput_KeyDown"/>
+    </Grid>
+
+</UserControl>
