@@ -122,7 +122,7 @@ public class MessageHandler
                     byteMessage.Write(receiveBuffer, 0, result.Count);
                 }
 
-                string receivedMessage = Encoding.UTF8.GetString(byteMessage.ToArray(), 0, (int) byteMessage.Length);
+                string receivedMessage = Encoding.UTF8.GetString(byteMessage.ToArray(), 0, (int)byteMessage.Length);
                 MessageEventArgs? jsonMessage = JsonSerializer.Deserialize<MessageEventArgs>(receivedMessage);
 
                 if (jsonMessage is null)

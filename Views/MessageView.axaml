@@ -34,10 +34,44 @@
             <Setter Property="BorderBrush" Value="#111111"/>
             <Setter Property="Background" Value="#111111"/>
         </Style>
+
+        <Style Selector="ListBox.messageBox">
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Background" Value="#111111"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="FontFamily" Value="{StaticResource LowerPixel}"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="LetterSpacing" Value="1"/>
+            <Setter Property="Foreground" Value="#EEEEEE"></Setter>
+        </Style>
     </UserControl.Styles>
 
-    <Grid>
-        <TextBox Grid.Row="0" x:Name="MessageInput" Classes="messageInput" MaxLength="7500" TextAlignment="DetectFromContent" AcceptsReturn="True" KeyDown="MessageInput_KeyDown"/>
+    <Grid RowDefinitions="70*, 30*" ColumnDefinitions="*">
+        <ListBox Grid.Row="0" Classes="messageBox" ItemsSource="{Binding Messages}" SelectionMode="Single" KeyDown="MessageBox_KeyDown">
+            <ListBox.Styles>
+                <Style Selector="ListBoxItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+                <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                    <Setter Property="Background" Value="Transparent" />
+                </Style>
+                <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+                    <Setter Property="Background" Value="Transparent" />
+                </Style>
+            </ListBox.Styles>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <TextBox Grid.Row="1" Name="MessageInput" Classes="messageInput" MaxLength="7500" TextAlignment="DetectFromContent" AcceptsReturn="True" KeyDown="MessageInput_KeyDown"/>
     </Grid>
 
 </UserControl>

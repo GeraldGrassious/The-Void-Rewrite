@@ -33,10 +33,8 @@
     <StackPanel>
         <Border Grid.Row="0" Grid.Column="0" Background="#010101" VerticalAlignment="Top" PointerPressed="TitleBar_PointerPressed">
             <DockPanel>
-                <TextBlock x:Name="ConnectionText" FontFamily="{StaticResource LowerPixel}">Attempting to Connect...</TextBlock>
-
                 <Button DockPanel.Dock="Right" Content="✕" VerticalAlignment="Center"  Background="Transparent" Foreground="#EEEEEE" CornerRadius="0" FontSize="18" Click="CloseButton_Clicked"/>
-                <Button DockPanel.Dock="Right" x:Name="MaximizeButton" Content="☐" VerticalAlignment="Center"  Background="Transparent" Foreground="#EEEEEE" CornerRadius="0" FontSize="18" Click="MaximizeButton_Clicked"/>
+                <Button DockPanel.Dock="Right" Name="MaximizeButton" Content="☐" VerticalAlignment="Center"  Background="Transparent" Foreground="#EEEEEE" CornerRadius="0" FontSize="18" Click="MaximizeButton_Clicked"/>
                 <Button DockPanel.Dock="Right" Content="—" HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent" Foreground="#EEEEEE" CornerRadius="0" FontSize="18" Click="MinimizeButton_Clicked"/>
             </DockPanel>
         </Border>

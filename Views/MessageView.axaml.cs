@@ -1,7 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-
 namespace TheVoidRewrite.Views;
 
 public partial class MessageView : UserControl
@@ -31,5 +30,21 @@ public partial class MessageView : UserControl
         }
 
         e.Handled = true;
+    }
+
+    private void MessageBox_KeyDown(object? sender, KeyEventArgs e)
+    {
+        if (e.Key != Key.Down)
+        {
+            return;
+        }
+
+        if (!e.KeyModifiers.HasFlag(KeyModifiers.Control))
+        {
+            return;
+        }
+
+        e.Handled = true;
+        Utils.ScrollToBottomListBox((ListBox)sender!);
     }
 }
