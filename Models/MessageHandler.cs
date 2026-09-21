@@ -68,7 +68,7 @@ public class MessageHandler
 
     private string ChatToJson(string message)
     {
-        MessageEventArgs newMessage = new("chat", username!, usernameColour!, "", message);
+        MessageEventArgs newMessage = new("Chat", username!, usernameColour!, "", message);
 
         string jsonString = JsonSerializer.Serialize(newMessage);
 

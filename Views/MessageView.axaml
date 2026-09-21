@@ -64,14 +64,26 @@
                 </Style>
             </ListBox.Styles>
 
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    
+            <ListBox.DataTemplates>
+                <DataTemplate DataType="{x:Type vm:MessageData}">
+                    <TextBlock Text="{Binding Data}" TextWrapping="Wrap" TextAlignment="DetectFromContent"/>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
+
+                <DataTemplate DataType="{x:Type vm:MessageInfo}">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="DetectFromContent">
+                        <Run Text="{Binding Sender}" Foreground="{Binding SenderNameColour}" FontWeight="Bold"/>
+                        <Run Text="{Binding Time}" Foreground="#444549"/>
+                        <Run Text="{Binding Data}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.DataTemplates>
         </ListBox>
 
-        <TextBox Grid.Row="1" Name="MessageInput" Classes="messageInput" MaxLength="7500" TextAlignment="DetectFromContent" AcceptsReturn="True" KeyDown="MessageInput_KeyDown"/>
+        <TextBox Grid.Row="1" Name="MessageInput" Classes="messageInput" Text="{Binding MessageInputText}" MaxLength="7500" TextAlignment="DetectFromContent" AcceptsReturn="True" KeyDown="MessageInput_KeyDown">
+            <TextBox.KeyBindings>
+                <KeyBinding Gesture="Enter" Command="{Binding SendMessage, Mode=TwoWay}"/>
+            </TextBox.KeyBindings>
+        </TextBox>
     </Grid>
 
 </UserControl>

@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using TheVoidRewrite.Models;
 
 namespace TheVoidRewrite.ViewModels;
@@ -15,13 +17,16 @@ public class MessageInfo(string sender, string senderNameColour, string time, st
     public string Time { get; } = time;
 }
 
-public class MessageViewModel : ViewModelBase
+public partial class MessageViewModel : ViewModelBase
 {
     private readonly MessageHandler messageHandler;
     private string previousSender;
     private bool loadHistory;
     private ObservableCollection<MessageData> history;
     public ObservableCollection<MessageData> Messages { get; set; }
+
+    [ObservableProperty]
+    public string _messageInputText;
 
     public MessageViewModel(MessageHandler messageHandler)
     {
@@ -32,6 +37,19 @@ public class MessageViewModel : ViewModelBase
         loadHistory = true;
         history = [];
         Messages = [];
+        _messageInputText = "";
+    }
+
+    [RelayCommand]
+    public void SendMessage()
+    {
+        if (string.IsNullOrWhiteSpace(MessageInputText))
+        {
+            return;
+        }
+
+        messageHandler.SendChatMessage(MessageInputText.Trim());
+        MessageInputText = "";
     }
 
     private void MessageReceived(object? sender, MessageEventArgs e)

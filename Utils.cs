@@ -26,6 +26,6 @@ public static class Utils
             return new MessageData(e.Data);
         }
 
-        return new MessageInfo(e.Sender, e.SenderNameColour, e.Time, e.Data);
+        return new MessageInfo(e.Sender + ' ', e.SenderNameColour, e.Time + '\n', e.Data);
     }
 }
