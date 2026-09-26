@@ -8,8 +8,42 @@
         x:Class="TheVoidRewrite.Views.NameView"
         x:DataType="vm:NameViewModel">
 
+        <UserControl.Styles>
+            <Style Selector="TextBox.messageInput">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="20"/>
+                <Setter Property="Padding" Value="15"/>
+                <Setter Property="Background" Value="#111111"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="CornerRadius" Value="15"/>
+                <Setter Property="PlaceholderText" Value="Type Message Here..."/>
+                <Setter Property="FontFamily" Value="{StaticResource LowerPixel}"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="LetterSpacing" Value="1"/>
+                <Setter Property="Foreground" Value="#EEEEEE"></Setter>
+            </Style>
+
+            <Style Selector="TextBox.messageInput:focus /template/ Border#PART_BorderElement">
+                <Setter Property="Background" Value="#111111"/>
+                <Setter Property="BorderBrush" Value="#111111"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+
+            <Style Selector="TextBox.messageInput:pointerover /template/ Border#PART_BorderElement">
+                <Setter Property="BorderBrush" Value="#111111"/>
+                <Setter Property="Background" Value="#111111"/>
+            </Style>
+        </UserControl.Styles>
+
     <StackPanel>
-        <TextBlock Text="Name"/>
+        <ColorView Name="ColourPicker"  IsAlphaEnabled="False" IsAlphaVisible="False" IsAccentColorsVisible="False" IsColorPaletteVisible="False" Color="{Binding NameColour}"/>
+
+        <TextBox Name="NameBox" Classes="messageInput" Text="{Binding NameInputText, Mode=TwoWay}" MaxLength="75" TextAlignment="DetectFromContent" FontSize="50" PlaceholderText="Type Username Here...">
+            <TextBox.KeyBindings>
+                <KeyBinding Gesture="Enter" Command="{Binding SubmitNameCommand}"/>
+            </TextBox.KeyBindings>
+        </TextBox>
     </StackPanel>
 
 </UserControl>

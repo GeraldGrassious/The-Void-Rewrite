@@ -1,3 +1,4 @@
+using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TheVoidRewrite.Models;
@@ -14,11 +15,18 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         _currentPage = new NameViewModel(messageHandler);
+
+        messageHandler.MessageLoopStarted += GoMessageCommand;
     }
 
-    [RelayCommand]
-    private void GoName() => CurrentPage = new NameViewModel(messageHandler);
+    private void GoMessageCommand(object? sender, EventArgs e)
+    {
+        CurrentPage = new MessageViewModel(messageHandler);
+    }
 
-    [RelayCommand]
-    private void GoMessage() => CurrentPage = new MessageViewModel(messageHandler);
+    // [RelayCommand]
+    // private void GoName() => CurrentPage = new NameViewModel(messageHandler);
+
+    // [RelayCommand]
+    // private void GoMessage() => CurrentPage = new MessageViewModel(messageHandler);
 }

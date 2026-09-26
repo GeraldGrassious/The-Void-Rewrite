@@ -23,15 +23,18 @@ public class MessageHandler
 {
     private readonly Uri uri = new("wss://the-void.cc");
     private readonly Queue<string> messageQueue = new();
+    public event EventHandler MessageLoopStarted = delegate {};
     public event EventHandler<MessageEventArgs> MessageReceived = delegate {};
 
-    private string? username = null;
-    private string? usernameColour = null;
+    public string? Username { get; private set; } = null;
+    public string? UsernameColour { get; private set; } = null;
 
     public async void MessageLoop(string username, string usernameColour)
     {
-        this.username = username;
-        this.usernameColour = usernameColour;
+        Username = username;
+        UsernameColour = usernameColour;
+
+        MessageLoopStarted?.Invoke(this, EventArgs.Empty);
 
         while (true)
         {
@@ -52,7 +55,6 @@ public class MessageHandler
                     await Task.Delay(1000);
                 }
             }
-
             // Does receiving and sending without locking out one of them
             var receiveTask = ReceiveMessages(ws);
             var sendTask = SendMessages(ws);
@@ -68,7 +70,7 @@ public class MessageHandler
 
     private string ChatToJson(string message)
     {
-        MessageEventArgs newMessage = new("Chat", username!, usernameColour!, "", message);
+        MessageEventArgs newMessage = new("Chat", Username!, UsernameColour!, "", message);
 
         string jsonString = JsonSerializer.Serialize(newMessage);
 

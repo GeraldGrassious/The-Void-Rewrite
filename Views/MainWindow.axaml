@@ -39,8 +39,8 @@
             </DockPanel>
         </Border>
 
-        <Button Command="{Binding GoNameCommand}"/>
-        <Button Command="{Binding GoMessageCommand}"/>
+        <!-- <Button Command="{Binding GoNameCommand}"/>
+        <Button Command="{Binding GoMessageCommand}"/> -->
 
         <ContentControl Content="{Binding CurrentPage}" />
     </StackPanel>
